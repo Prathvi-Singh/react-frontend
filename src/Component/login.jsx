@@ -16,6 +16,7 @@ import axios from 'axios';
 
 
 const defaultTheme = createTheme();
+const BackgroundImage='https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pxfuel.com%2Fen%2Fdesktop-wallpaper-pffwx&psig=AOvVaw2xD6BWXcOL7etX5rGUFK6V&ust=1702273845482000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLDYzLOWhIMDFQAAAAAdAAAAABAR'
 
 export default function SignIn() {
   const handleSubmit = async(event) => {
@@ -38,7 +39,12 @@ export default function SignIn() {
       }
       console.log(d);
       const response = await axios.post('http://localhost:8000/login', d);
-      alert("login");
+      if(response.status===200){
+        alert(" logged in successfully");
+      }
+      else{
+        alert("already email exist or any other problem");
+      }
    }
    catch(err){
      alert("wrong information");
@@ -48,6 +54,7 @@ export default function SignIn() {
   };
 
   return (
+
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -57,11 +64,14 @@ export default function SignIn() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            backgroundImage: `url(${BackgroundImage})`, // Set background image
+            backgroundSize: 'cover',
+            height: '100vh', // Adjust the height as needed
            
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            {/* <LockOutlinedIcon /> */}
+          
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
@@ -114,7 +124,7 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
+      
       </Container>
     </ThemeProvider>
   );

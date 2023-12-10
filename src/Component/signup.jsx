@@ -43,12 +43,19 @@ export default function SignUp() {
       }
       console.log(d);
       const response = await axios.post('http://localhost:8000/register', d);
-      alert("Now you can login");
-     
+      console.log(response.status);
+      if(response.status===200){
+        alert("You are register successfully , please log in");
+      }
+      else{
+        console.log("already email exist")
+        alert("already email exist or any other problem");
+      }
 
    }
    catch(err){
     console.log(err);
+    alert("already email exist or any other problem");
    }
   
   };
