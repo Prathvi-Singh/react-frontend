@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 
 const defaultTheme = createTheme();
@@ -39,8 +40,10 @@ export default function SignIn() {
       }
       console.log(d);
       const response = await axios.post('http://localhost:8000/login', d);
+   
       if(response.status===200){
-        alert(" logged in successfully");
+        window.location.href = 'https://psingh-portfolio.netlify.app/';
+        alert("logged in successfully");
       }
       else{
         alert("already email exist or any other problem");
